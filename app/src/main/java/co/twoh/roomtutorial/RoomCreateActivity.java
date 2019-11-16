@@ -1,12 +1,12 @@
 package co.twoh.roomtutorial;
 
 import android.app.Activity;
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +50,7 @@ public class RoomCreateActivity extends AppCompatActivity {
                     barang.setHargaBarang(etHargaBarang.getText().toString());
 
                     updateBarang(barang);
+                    finish();
                 }
             });
         }else{
@@ -61,6 +62,7 @@ public class RoomCreateActivity extends AppCompatActivity {
                     b.setMerkBarang(etMerkBarang.getText().toString());
                     b.setNamaBarang(etNamaBarang.getText().toString());
                     insertData(b);
+                    finish();
                 }
             });
         }

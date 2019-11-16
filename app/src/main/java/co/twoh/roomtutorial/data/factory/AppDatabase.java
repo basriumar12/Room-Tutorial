@@ -1,7 +1,7 @@
 package co.twoh.roomtutorial.data.factory;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
 import co.twoh.roomtutorial.data.BarangDAO;
 import co.twoh.roomtutorial.model.Barang;
