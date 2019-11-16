@@ -69,6 +69,8 @@ public class RoomCreateActivity extends AppCompatActivity {
     }
 
     private void updateBarang(final Barang barang){
+
+
         new AsyncTask<Void, Void, Long>(){
             @Override
             protected Long doInBackground(Void... voids) {
@@ -78,23 +80,40 @@ public class RoomCreateActivity extends AppCompatActivity {
 
             @Override
             protected void onPostExecute(Long status) {
-                Toast.makeText(RoomCreateActivity.this, "status row "+status, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RoomCreateActivity.this, "status berhasil update ", Toast.LENGTH_SHORT).show();
             }
         }.execute();
     }
 
     private void insertData(final Barang barang){
+        // di room di wajibkan menggunakan proses background ketika melakukan crud data
+        // tidak di rekomendasikan di buat di main trhead
+        // disini kita coba pakai asyntask utk jalani di backgroudnya
+//
+//        Gunakan kelas AsyncTask untuk mengimplementasikan tugas asinkron yang berjalan lama di Worker Thread/Thread Pekerja. Worker Thread adalah Thread yang bukan Thread UI/Main Thread. AsyncTask memungkinkan anda menjalankan operasi latar belakang dan mempublikasikan hasil di Thread UI tanpa memanipulasi thread.
+//
+//        Bila AsyncTask dieksekusi, maka akan melalui empat langkah :
+//
+//        onPreExecute(), dipanggil di Thread UI sebelum tugas di eksekusi. Langkah ini biasanya digunakan untuk mempersiapkan tugas misalnya dengan menampilkan bilah kemajuan di UI.
+//        doInBackground(Params…), dipanggil pada Background Thread setelah onPreExecute() selesai dijalankan. Langkah ini menjalankan komputasi latar belakang, mengembalikan hasil dan meneruskan hasilnya ke onPostExecute(). Metode doInBackground() juga bisa memanggil publishProgress(Progress…) untuk mempublikasikan satu atau beberapa unit kemajuan.
+//                onProgressUpdate(Progress…), berjalan di Thread UI setelah publishProgress(Progress…) dipanggil. Gunakan onProgressUpdate() untuk melaporkan suatu bentuk kemajuan ke Thread UI sewaktu komputasi latar belakang dieksekusi. Misalnya, anda bisa menggunakannya untuk meneruskan data guna menganimasikan bilah kemajuan atau menampilkan log di bidang teks.
+//                onPostExecute(Result), berjalan di Thread UI setelah komputasi latar belakang selesai.
+
+    //submber https://medium.com/easyread/konsep-asynctask-dan-asynctaskloader-pada-android-b5ba2744dcdb
+        //disini kita hanya menggunakan 2 method yaitu doInbackground dan onPostExcute
 
         new AsyncTask<Void, Void, Long>(){
             @Override
+            // disni kita panggil function untuk insert
             protected Long doInBackground(Void... voids) {
                 long status = db.barangDAO().insertBarang(barang);
                 return status;
             }
 
             @Override
+            //disni kita beritahu proses insert sudah selesai
             protected void onPostExecute(Long status) {
-                Toast.makeText(RoomCreateActivity.this, "status row "+status, Toast.LENGTH_SHORT).show();
+                Toast.makeText(RoomCreateActivity.this, "status berhasil di insert ", Toast.LENGTH_SHORT).show();
             }
         }.execute();
     }

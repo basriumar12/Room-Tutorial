@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,6 +26,7 @@ public class RoomReadActivity extends AppCompatActivity {
     private AppDatabase db;
     private RecyclerView rvView;
     private RecyclerView.Adapter adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<Barang> daftarBarang;
 
@@ -36,6 +38,7 @@ public class RoomReadActivity extends AppCompatActivity {
          */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout) ;
 
         /**
          * Initialize ArrayList untuk data barang
@@ -57,20 +60,35 @@ public class RoomReadActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         rvView.setLayoutManager(layoutManager);
 
+        addData();
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                addData();
+            }
+        });
+
+    }
+
+    void addData (){
+
         /**
          * Add all data to arraylist
+         *
+         *
          */
+        daftarBarang.clear();
         daftarBarang.addAll(Arrays.asList(db.barangDAO().selectAllBarangs()));
+
 
         /**
          * Set all data ke adapter, dan menampilkannya
          */
         adapter = new AdapterBarangRecyclerView(daftarBarang, this);
         rvView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false); ;
     }
 
-    public static Intent getActIntent(Activity activity) {
-        // kode untuk pengambilan Intent
-        return new Intent(activity, RoomReadActivity.class);
-    }
+
 }

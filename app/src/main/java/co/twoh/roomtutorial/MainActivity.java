@@ -1,6 +1,8 @@
 package co.twoh.roomtutorial;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,14 +20,17 @@ public class MainActivity extends AppCompatActivity {
         btCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(RoomCreateActivity.getActIntent(MainActivity.this));
+
+                startActivity(new Intent(MainActivity.this, RoomCreateActivity.class));
+
             }
         });
 
         btView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(RoomReadActivity.getActIntent(MainActivity.this));
+                startActivity(new Intent(MainActivity.this, RoomReadActivity.class));
+
             }
         });
     }
