@@ -40,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         } else  if (username.equals("aku") && pass.equals("aku")){
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
+        } else {
+            Toast.makeText(this, "pass salah", Toast.LENGTH_SHORT).show();
         }
     }
 }
