@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,15 +23,23 @@ public class LoginActivity extends AppCompatActivity {
         edtUser = (EditText) findViewById(R.id.edt_username);
         edtPass = (EditText) findViewById(R.id.edt_pass);
 
-        logicLogin();
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logicLogin();
+            }
+        });
+
     }
 
     private void logicLogin() {
-
-        if (edtUser.getText().toString().isEmpty() || edtPass.getText().toString().isEmpty()) {
+        String username = edtUser.getText().toString();
+        String pass = edtPass.getText().toString();
+        if (username.isEmpty() || pass.isEmpty()) {
             Toast.makeText(this, "data harus di isi", Toast.LENGTH_SHORT).show();
-        } else {
+        } else  if (username.equals("aku") && pass.equals("aku")){
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
         }
     }
 }
