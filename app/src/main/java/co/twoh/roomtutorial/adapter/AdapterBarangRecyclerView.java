@@ -126,8 +126,8 @@ public class AdapterBarangRecyclerView extends RecyclerView.Adapter<AdapterBaran
                 return true;
             }
         });
-        holder.tvTitle.setText(name);
-        holder.tvHarga.setText(harga);
+        holder.tvTitle.setText("Nama barang :" +name);
+        holder.tvHarga.setText("Harga Barang Rp. "+harga);
     }
 
     private void onDeteleBarang(int position){
