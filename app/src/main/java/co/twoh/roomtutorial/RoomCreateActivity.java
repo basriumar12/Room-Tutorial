@@ -31,6 +31,8 @@ public class RoomCreateActivity extends AppCompatActivity {
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "barangdb").build();
 
+
+
         final EditText etNamaBarang   = findViewById(R.id.et_namabarang);
         final EditText etMerkBarang   = findViewById(R.id.et_merkbarang);
         final EditText etHargaBarang  = findViewById(R.id.et_hargabarang);

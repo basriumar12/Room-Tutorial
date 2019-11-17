@@ -48,12 +48,13 @@ public class AdapterBarangRecyclerView extends RecyclerView.Adapter<AdapterBaran
          * Di tutorial ini kita hanya menggunakan data String untuk tiap item
          * dan juga view nya hanyalah satu TextView
          */
-        TextView tvTitle;
+        TextView tvTitle, tvHarga;
         CardView cvMain;
 
         ViewHolder(View v) {
             super(v);
             tvTitle = v.findViewById(R.id.tv_namabarang);
+            tvHarga = v.findViewById(R.id.tv_hargbarang);
             cvMain = v.findViewById(R.id.cv_main);
         }
     }
@@ -75,6 +76,7 @@ public class AdapterBarangRecyclerView extends RecyclerView.Adapter<AdapterBaran
          *  Menampilkan data pada view
          */
         final String name = daftarBarang.get(position).getNamaBarang();
+        final String harga = daftarBarang.get(position).getHargaBarang();
 
         holder.cvMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +127,7 @@ public class AdapterBarangRecyclerView extends RecyclerView.Adapter<AdapterBaran
             }
         });
         holder.tvTitle.setText(name);
+        holder.tvHarga.setText(harga);
     }
 
     private void onDeteleBarang(int position){
